@@ -53,7 +53,7 @@ module morse_decoder_application
     
     shift_register left_shift(
         .clk(clk),
-        .reset_n(~(lg|wg)),
+        .reset_n(reset_n & ~(lg|wg)),
         .shift(dot^dash),
         .SI(dash),
         .Q(Q)
@@ -61,7 +61,7 @@ module morse_decoder_application
     
     udl_counter #(.BITS(3)) digit_count(
         .clk(clk),
-        .reset_n(~(lg|wg)),
+        .reset_n(reset_n & ~(lg|wg)),
         .enable(dot^dash),
         .up(1),
         .load(count == 5),
